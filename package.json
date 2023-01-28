@@ -4,7 +4,6 @@
   "description": "Word Counter",
   "scripts": {
     "test": "npm run tsc && npm run build",
-    "format": "prettier --write .",
     "tsc": "npm run tsc:main && npm run tsc:ui",
     "tsc:main": "tsc --noEmit -p widget-src",
     "tsc:ui": "tsc --noEmit -p ui-src",
@@ -13,7 +12,9 @@
     "build:main": "esbuild widget-src/code.tsx --bundle --outfile=dist/code.js",
     "build:ui": "npx vite build --minify esbuild --emptyOutDir=false",
     "build:watch": "concurrently -n widget,iframe \"npm run build:main -- --watch\" \"npm run build:ui -- --watch\"",
-    "dev": "concurrently -n tsc,build,vite 'npm:tsc:watch' 'npm:build:watch' 'vite'"
+    "dev": "concurrently -n tsc,build,vite 'npm:tsc:watch' 'npm:build:watch' 'vite'",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.ts .",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "author": "Figma",
   "license": "MIT License",
@@ -26,10 +27,14 @@
     "@figma/widget-typings": "*",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
     "@vitejs/plugin-react-refresh": "^1.3.1",
     "concurrently": "^6.3.0",
     "esbuild": "^0.13.5",
-    "prettier": "^2.3.2",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "^2.8.3",
     "typescript": "^4.4.2",
     "vite": "^2.5.2",
     "vite-plugin-singlefile": "^0.5.1"
