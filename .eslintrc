@@ -6,16 +6,14 @@
   },
   "plugins": ["@typescript-eslint"],
   "extends": [
-    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    // for some reason, the below extra rules make no-unused-vars not work in vscode. Unsure if other things are breaking too.
+    // "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    // "plugin:@typescript-eslint/strict",
     "prettier"
   ],
 
-  "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
-    // to enforce using type for object type definitions, can be type or interface
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
-  },
+  "rules": {},
 
   "env": {
     "browser": true,
