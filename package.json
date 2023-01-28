@@ -2,6 +2,8 @@
   "name": "word-counter-widget",
   "version": "1.0.0",
   "description": "Word Counter",
+  "author": "Ligerx",
+  "license": "MIT License",
   "scripts": {
     "test": "npm run tsc && npm run build",
     "tsc": "npm run tsc:main && npm run tsc:ui",
@@ -16,8 +18,6 @@
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
-  "author": "Figma",
-  "license": "MIT License",
   "dependencies": {
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
