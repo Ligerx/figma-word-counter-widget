@@ -1,0 +1,11 @@
+{
+  "name": "Word Counter",
+  "id": "widget-id-DRp4tj7tXE",
+  "api": "1.0.0",
+  "editorType": ["figma","figjam"],
+  "permissions": [],
+  "containsWidget": true,
+  "main": "dist/code.js",
+  "ui": "dist/index.html",
+  "widgetApi": "1.0.0"
+}
