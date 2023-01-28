@@ -1,6 +1,16 @@
-# @figma/create-widget
+![Word Counter Cover](./WordCounterCoverArt.png)
+
+# Word Counter Widget
+
+Figma Widget - Count the words and characters in any selected layers.
+
+_Creating a new repo instead of turning [the plugin version](https://github.com/Ligerx/figma-word-counter) into a mono repo just out of convenience._
+
+## Info
 
 This repo was created by @figma/create-widget
+
+ESLint and Prettier with Typescript setup with these instructions: https://blog.logrocket.com/linting-typescript-eslint-prettier
 
 ## Getting started
 
