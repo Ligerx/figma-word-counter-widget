@@ -1,6 +1,12 @@
 const { widget } = figma;
 const { AutoLayout, Ellipse, Frame, Image, Rectangle, SVG, Text } = widget;
 
+/*
+Figma Widget components return `any` instead of the `JSX.Element` that components typically infer.
+This makes ESLint yell at you about unsafe returns.
+I also can't get the type JSX.Element to resolve to manually type it.
+*/
+
 function Widget() {
   return (
     <AutoLayout
@@ -30,6 +36,6 @@ function Widget() {
         Click Me
       </Text>
     </AutoLayout>
-  );
+  ) as JSX.Element;
 }
 widget.register(Widget);
