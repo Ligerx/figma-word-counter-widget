@@ -14,7 +14,9 @@
     "prettier"
   ],
 
-  "rules": {},
+  "rules": {
+    "@typescript-eslint/consistent-type-definitions": ["warn", "type"]
+  },
 
   "env": {
     "browser": true,
