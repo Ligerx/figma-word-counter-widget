@@ -1,11 +1,16 @@
+// Figma Widget components typing doesn't get interpretted correctly by TS.
+// This makes ESLint yell at you about incorrect typing.
+
+// Need to import React for TS to infer component types, otherwise they're always `any`.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React from "react";
+
 const { widget } = figma;
 const { AutoLayout, Ellipse, Frame, Image, Rectangle, SVG, Text } = widget;
 
-/*
-Figma Widget components return `any` instead of the `JSX.Element` that components typically infer.
-This makes ESLint yell at you about unsafe returns.
-I also can't get the type JSX.Element to resolve to manually type it.
-*/
+function Test() {
+  return <button>Testing</button>;
+}
 
 function Widget() {
   return (
@@ -36,6 +41,6 @@ function Widget() {
         Click Me
       </Text>
     </AutoLayout>
-  ) as JSX.Element;
+  );
 }
 widget.register(Widget);
