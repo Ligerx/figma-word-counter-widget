@@ -1,9 +1,10 @@
-// Figma Widget components typing doesn't get interpretted correctly by TS.
-// This makes ESLint yell at you about incorrect typing.
-
-// Need to import React for TS to infer component types, otherwise they're always `any`.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React from "react";
+// Annoying, but @typescript-eslint/no-unsafe-return is showing lots of errors because it's unable to
+// determine the return type of any of the widget components, instead it sees them as `any`.
+// Not totally sure how to solve the root cause. So the alternative is to either disable the eslint rule
+// or manually type the component return type. I went with the latter option.
+//
+// Adding `import React from "react";` makes the types resolve to `JSX.Element`, but this is not a match
+// for what widgets are expecting as return types.
 
 const { widget } = figma;
 const { AutoLayout, Text, Line } = widget;
@@ -29,7 +30,7 @@ function Row({ label, num }: RowProps) {
       </AutoLayout>
       <Line stroke="#CCC" length="fill-parent" />
     </AutoLayout>
-  );
+  ) as FigmaDeclarativeNode;
 }
 
 function Widget() {
@@ -54,7 +55,7 @@ function Widget() {
         {data[3]} text layers selected
       </Text>
     </AutoLayout>
-  );
+  ) as FigmaDeclarativeNode;
 }
 
 widget.register(Widget);
