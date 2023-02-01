@@ -5,11 +5,6 @@ export type Counts = {
   numSelected: number;
 };
 
-/**
- * Get Counts object form a list of nodes
- * @param nodes
- * @returns Counts
- */
 export function getCountsForNodes(nodes: SceneNode[]): Counts {
   const strings = findAllTextForNodes(nodes);
   return getCounts(strings);
@@ -40,7 +35,7 @@ function getCounts(strings: string[]): Counts {
   };
 }
 
-// counting words makes most sense with an array of strings instead of 1 concatenated string
+// counting characters/words makes most sense with an array of strings instead of 1 concatenated string
 function countCharacters(strings: string[]): number {
   let count = 0;
   strings.forEach((string) => (count += string.length));
