@@ -6,24 +6,13 @@
 import React from "react";
 
 const { widget } = figma;
-const { AutoLayout, Ellipse, Frame, Image, Rectangle, SVG, Text, Line } =
-  widget;
+const { AutoLayout, Text, Line } = widget;
 
 type RowProps = { label: string; num: number };
 
 function Row({ label, num }: RowProps) {
   return (
-    <AutoLayout
-      direction="vertical"
-      spacing={16}
-      padding={{
-        top: 10,
-        right: 0,
-        bottom: 0,
-        left: 0,
-      }}
-      width="fill-parent"
-    >
+    <AutoLayout direction="vertical" spacing={20} width="fill-parent">
       <AutoLayout spacing={16} width="fill-parent" verticalAlignItems="center">
         <Text
           fill="#333"
@@ -49,13 +38,13 @@ function Widget() {
   return (
     <AutoLayout
       direction="vertical"
-      padding={{ vertical: 24, horizontal: 32 }}
-      spacing={8}
+      padding={{ vertical: 32, horizontal: 32 }}
+      spacing={20}
       width={360}
       fill="#FFF"
-      cornerRadius={8}
+      cornerRadius={16}
     >
-      <Text fill="#333" fontFamily="Inter" fontSize={16} fontWeight={600}>
+      <Text fill="#666" fontFamily="Inter" fontSize={16} fontWeight={600}>
         Word Counter
       </Text>
       <Row label={"Characters"} num={data[0]} />
@@ -64,51 +53,8 @@ function Widget() {
       <Text fill="#666" fontFamily="Inter" fontSize={16}>
         {data[3]} text layers selected
       </Text>
-      <Text
-        fill="#333"
-        fontFamily="Inter"
-        fontSize={16}
-        textDecoration="underline"
-        width="fill-parent"
-        horizontalAlignText="center"
-        href="https://github.com/Ligerx/figma-word-counter-widget"
-      >
-        GitHub
-      </Text>
     </AutoLayout>
   );
 }
-
-// function Widget() {
-//   return (
-//     <AutoLayout
-//       direction="horizontal"
-//       horizontalAlignItems="center"
-//       verticalAlignItems="center"
-//       height="hug-contents"
-//       padding={8}
-//       fill="#FFFFFF"
-//       cornerRadius={8}
-//       spacing={12}
-//       onClick={async () => {
-//         await new Promise((resolve) => {
-//           figma.showUI(__html__);
-//           figma.ui.on("message", (msg) => {
-//             if (msg === "hello") {
-//               figma.notify("Hello Widgets");
-//             }
-//             if (msg === "close") {
-//               figma.closePlugin();
-//             }
-//           });
-//         });
-//       }}
-//     >
-//       <Text fontSize={32} horizontalAlignText="center">
-//         Click Me Test
-//       </Text>
-//     </AutoLayout>
-//   );
-// }
 
 widget.register(Widget);
