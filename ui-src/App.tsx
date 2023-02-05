@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
 
 function App() {
-  useEffect(() => {
-    if (typeof parent !== undefined) {
-      parent?.postMessage?.({ pluginMessage: "hello" }, "*");
-    }
-  }, []);
-
   return (
     <div className="App">
-      <h1>Hello</h1>
       <button
         onClick={() => {
-          parent?.postMessage?.({ pluginMessage: "close" }, "*");
+          parent?.postMessage?.(
+            { pluginMessage: "confirm-layer-selection" },
+            "*"
+          );
         }}
       >
-        Close
+        Use currently selected layers
       </button>
     </div>
   );
