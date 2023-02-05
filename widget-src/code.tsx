@@ -10,7 +10,15 @@ import { getCountsForNodes, isSceneNode, Counts } from "./lib";
 
 const { widget } = figma;
 // eslint-disable-next-line @typescript-eslint/unbound-method
-const { AutoLayout, Text, Line, SVG, usePropertyMenu, useSyncedState } = widget;
+const {
+  AutoLayout,
+  Text,
+  Line,
+  SVG,
+  usePropertyMenu,
+  useSyncedState,
+  useWidgetId,
+} = widget;
 
 // https://www.figma.com/plugin-docs/accessing-document/#optimizing-traversals
 // https://www.figma.com/plugin-docs/api/properties/figma-skipinvisibleinstancechildren/
@@ -70,6 +78,8 @@ function Widget() {
   const [{ characters, charactersNoSpaces, words, numSelected }, setCounts] =
     useSyncedState<Counts>("countsTEST", () => layerIdsToCounts(layerIds));
 
+  const widgetId = useWidgetId();
+
   usePropertyMenu(
     [
       {
@@ -83,7 +93,11 @@ function Widget() {
       // See https://github.com/figma/widget-samples/blob/881d9524b8d3413539ebd839218667249f15370f/WidgetToast/widget-src/code.tsx#L21
       await new Promise(() => {
         if (propertyName === "select-new-layers") {
-          figma.showUI(__html__);
+          const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
+          figma.showUI(__html__, {
+            position: { x: widgetNode.x, y: widgetNode.y },
+          });
+
           figma.ui.on("message", (msg) => {
             if (msg === "confirm-layer-selection") {
               figma.notify("Updated selected layers");
