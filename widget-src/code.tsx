@@ -132,7 +132,8 @@ function Widget() {
           verticalAlignItems="center"
           hoverStyle={{ fill: "#CCC" }}
           onClick={() => {
-            console.log("test");
+            figma.notify("Updated word count");
+            setCounts(layerIdsToCounts(layerIds));
           }}
         >
           {/* Looks like you can only style the frame that automatically wraps the vector, not the vector itself */}
