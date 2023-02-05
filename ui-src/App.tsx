@@ -5,6 +5,7 @@ function App() {
   return (
     <div className="App">
       <button
+        className="button button--primary"
         onClick={() => {
           parent?.postMessage?.(
             { pluginMessage: "confirm-layer-selection" },
