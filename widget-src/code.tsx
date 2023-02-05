@@ -9,14 +9,16 @@
 import { getCountsForNodes, isSceneNode, Counts } from "./lib";
 
 const { widget } = figma;
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const {
   AutoLayout,
   Text,
   Line,
   SVG,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   usePropertyMenu,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   useSyncedState,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   useWidgetId,
 } = widget;
 
@@ -95,6 +97,8 @@ function Widget() {
         if (propertyName === "select-new-layers") {
           const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
           figma.showUI(__html__, {
+            height: 64,
+            width: 224,
             position: { x: widgetNode.x, y: widgetNode.y },
           });
 
