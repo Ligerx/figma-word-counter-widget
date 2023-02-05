@@ -10,7 +10,7 @@ import { getCountsForNodes, isSceneNode, Counts } from "./lib";
 
 const { widget } = figma;
 // eslint-disable-next-line @typescript-eslint/unbound-method
-const { AutoLayout, Text, Line, usePropertyMenu, useSyncedState } = widget;
+const { AutoLayout, Text, Line, SVG, usePropertyMenu, useSyncedState } = widget;
 
 // https://www.figma.com/plugin-docs/accessing-document/#optimizing-traversals
 // https://www.figma.com/plugin-docs/api/properties/figma-skipinvisibleinstancechildren/
@@ -57,6 +57,13 @@ function layerIdsToCounts(layerIds: string[]) {
   return getCountsForNodes(layers);
 }
 
+// Copied from https://heroicons.com/
+const refreshOutlineSvg = `
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+</svg>
+`;
+
 function Widget() {
   // useSyncedState only accepts serializable values, so using ids
   // only storing top level selections
@@ -96,24 +103,54 @@ function Widget() {
     }
   );
 
+  const widgetWidth = 360;
+  const buttonSize = 44;
+  const buttonMarginRight = 32;
+  const buttonMarginTop = 20;
+  const buttonX = widgetWidth - buttonSize - buttonMarginRight;
+  const buttonY = buttonMarginTop;
+
   return (
     <AutoLayout
       direction="vertical"
       padding={{ vertical: 32, horizontal: 32 }}
       spacing={20}
-      width={360}
+      width={widgetWidth}
       fill="#FFF"
       cornerRadius={16}
     >
-      <Text fill="#666" fontFamily="Inter" fontSize={16} fontWeight={600}>
-        Word Counter
-      </Text>
+      <AutoLayout width="fill-parent">
+        <AutoLayout direction="vertical" spacing={4} width="fill-parent">
+          <Text fill="#666" fontFamily="Inter" fontSize={16} fontWeight={600}>
+            Word Counter
+          </Text>
+
+          <Text fill="#666" fontFamily="Inter" fontSize={16}>
+            {numSelected} text layers selected
+          </Text>
+        </AutoLayout>
+
+        <AutoLayout
+          fill="#FFF"
+          stroke="#CCC"
+          cornerRadius={100}
+          width={buttonSize}
+          height={buttonSize}
+          horizontalAlignItems="center"
+          verticalAlignItems="center"
+          hoverStyle={{ fill: "#CCC" }}
+          onClick={() => {
+            console.log("test");
+          }}
+        >
+          {/* Looks like you can only style the frame that automatically wraps the vector, not the vector itself */}
+          <SVG src={refreshOutlineSvg} />
+        </AutoLayout>
+      </AutoLayout>
+
       <Row label={"Characters"} num={characters} />
-      <Row label={"Characters excluding spaces"} num={charactersNoSpaces} />
+      <Row label={"Characters \nexcluding spaces"} num={charactersNoSpaces} />
       <Row label={"Words"} num={words} />
-      <Text fill="#666" fontFamily="Inter" fontSize={16}>
-        {numSelected} text layers selected
-      </Text>
     </AutoLayout>
   ) as FigmaDeclarativeNode;
 }
