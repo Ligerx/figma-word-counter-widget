@@ -20,22 +20,19 @@ type RowProps = { label: string; num: number };
 
 function Row({ label, num }: RowProps) {
   return (
-    <AutoLayout direction="vertical" spacing={20} width="fill-parent">
-      <AutoLayout spacing={16} width="fill-parent" verticalAlignItems="center">
-        <Text
-          fill="#333"
-          width="fill-parent"
-          fontFamily="Inter"
-          fontSize={24}
-          fontWeight={600}
-        >
-          {label}
-        </Text>
-        <Text fill="#333" fontFamily="Inter" fontSize={24}>
-          {num}
-        </Text>
-      </AutoLayout>
-      <Line stroke="#CCC" length="fill-parent" />
+    <AutoLayout spacing={16} width="fill-parent" verticalAlignItems="center">
+      <Text
+        fill="#333"
+        width="fill-parent"
+        fontFamily="Inter"
+        fontSize={24}
+        fontWeight={600}
+      >
+        {label}
+      </Text>
+      <Text fill="#333" fontFamily="Inter" fontSize={24}>
+        {num}
+      </Text>
     </AutoLayout>
   ) as FigmaDeclarativeNode;
 }
@@ -103,23 +100,18 @@ function Widget() {
     }
   );
 
-  const widgetWidth = 360;
-  const buttonSize = 44;
-  const buttonMarginRight = 32;
-  const buttonMarginTop = 20;
-  const buttonX = widgetWidth - buttonSize - buttonMarginRight;
-  const buttonY = buttonMarginTop;
-
   return (
     <AutoLayout
       direction="vertical"
       padding={{ vertical: 32, horizontal: 32 }}
-      spacing={20}
-      width={widgetWidth}
+      spacing={16}
+      width={360}
       fill="#FFF"
+      stroke="#DDD"
       cornerRadius={16}
     >
-      <AutoLayout width="fill-parent">
+      {/* Adding height for extra padding */}
+      <AutoLayout width="fill-parent" height={56}>
         <AutoLayout direction="vertical" spacing={4} width="fill-parent">
           <Text fill="#666" fontFamily="Inter" fontSize={16} fontWeight={600}>
             Word Counter
@@ -134,8 +126,8 @@ function Widget() {
           fill="#FFF"
           stroke="#CCC"
           cornerRadius={100}
-          width={buttonSize}
-          height={buttonSize}
+          width={48}
+          height={48}
           horizontalAlignItems="center"
           verticalAlignItems="center"
           hoverStyle={{ fill: "#CCC" }}
@@ -149,7 +141,9 @@ function Widget() {
       </AutoLayout>
 
       <Row label={"Characters"} num={characters} />
+      <Line stroke="#DDD" length="fill-parent" />
       <Row label={"Characters \nexcluding spaces"} num={charactersNoSpaces} />
+      <Line stroke="#DDD" length="fill-parent" />
       <Row label={"Words"} num={words} />
     </AutoLayout>
   ) as FigmaDeclarativeNode;
